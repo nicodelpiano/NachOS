@@ -1,0 +1,73 @@
+NachOS
+--------------------------
+
+
+------ ACLARACIONES ------
+
+Banderas utilizadas:
+k: si queremos obtener informacion sobre accesos a la TLB, swap, y memoria virtual y fisica
+z: cuando se hace un savestate, restorestate, el resultado de un proceso
+
+Posible fix a futuro:
+sort tarda un poco mas de lo esperado (por lo menos en mi netbook, tal vez en una de 64 funcione mas rapido) y no sabemos por que razon, lo importante es que termina.
+
+Ejercicio 2)
+------ HITS Y MISSES ------
+
+(Para contar los hits y misses ejecutamos con la bandera -z, eso nos decia cuando terminaba el proceso
+y ahi mostrabamos el porcentaje con gdb, (p miss y p hit)).
+Los hits en el programa cuentan los misses y hits (o sea, la suma de ambos), 
+por lo tanto al total obtenido en hit, debe restarse los misses para obtener el total de hits real.
+Acá se muestran los hits reales (con los misses restados).
+
+---------------------------
+Paginas fisicas: 128
+TLB Size : 4
+---------------------------
+Resultados: (hit ratio)
+
+-----------------------------------------
+		   |   			
+  matmult	   |    0.92%			
+		   |   			
+-----------------------------------------
+		   |   			
+   sort		   |   	0.914%			
+		   |   			
+
+---------------------------
+Paginas fisicas: 128
+TLB Size : 32
+---------------------------
+
+Resultados: (hit ratio)
+
+
+-----------------------------------------
+		   |   			
+  matmult	   |    99,98%		
+		   |   			
+-----------------------------------------
+		   |   			
+   sort		   |   	99,93%		
+		   |   			
+
+
+---------------------------
+Paginas fisicas: 128
+TLB Size : 64
+---------------------------
+Resultados: (hit ratio)
+
+-----------------------------------------
+		   |   			
+  matmult	   |    99,99%	(nos daba un valor muy cercano al 100%)	
+		   |   			
+-----------------------------------------
+		   |   			
+   sort		   |   	99,99%	(nos daba un valor muy cercano al 100%)	
+		   |   			
+
+
+De las estadisticas obtenidas, concluímos que es mejor tener una TLB de tamaño 64.
+
